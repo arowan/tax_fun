@@ -4,7 +4,7 @@ module Calculator
   class Bracket
     attr_reader :lower_limit, :upper_limit, :percent
 
-    def initialize(lower_limit = nil, upper_limit, percent)
+    def initialize(lower_limit = nil, upper_limit = nil, percent)
       @lower_limit = lower_limit || 0
       @upper_limit = upper_limit
       @percent = percent || 0

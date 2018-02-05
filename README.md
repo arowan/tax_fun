@@ -8,7 +8,7 @@ bundle install
 ```
 
 ## lunching app
-``bash
+```bash
 Rackup
 ```
 
