@@ -1,0 +1,12 @@
+## requirements - not managed by Gemfile
+* ruby
+* bundler
+
+## installing requirements - managed by Gemfile
+`bundle install`
+
+## lunching app
+`Rackup`
+
+## testing app
+`rspec`

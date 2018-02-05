@@ -4,13 +4,13 @@ require 'byebug'
 
 ENV['RACK_ENV'] = 'test'
 
-Dir.glob(File.expand_path('lib/{controlers}/*.rb')).reverse.each {|file| require file }
+require File.expand_path('../../controllers/application_controller.rb', __FILE__)
 
 module RSpecMixin
   include Rack::Test::Methods
 
   def app
-    described_app
+    ApplicationController
   end
 end
 
