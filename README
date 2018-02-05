@@ -3,10 +3,16 @@
 * bundler
 
 ## installing requirements - managed by Gemfile
-`bundle install`
+```bash
+bundle install
+```
 
 ## lunching app
-`Rackup`
+``bash
+Rackup
+```
 
 ## testing app
-`rspec`
+```bash
+rspec
+```
