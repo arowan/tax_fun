@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'calculator'
+require 'calculate'
 
-describe Calculator::Bracket do
+describe Bracket::Abstract do
   describe '.new' do
     it "creates instance of #{described_class.name}" do
       expect(described_class.new(1, 2, nil)).to be_instance_of(described_class)
@@ -60,21 +60,44 @@ describe Calculator::Bracket do
         end
       end
     end
-  end
 
-  describe '#to_json' do
-    let(:subject) { described_class.new(1,2,3) }
-    let(:expected_json) { "{\"lower_limit\":1,\"upper_limit\":2,\"percent\":3}" }
-    it 'returns attributes as JSON' do
-      expect(subject.to_json).to eq(expected_json)
+    describe '#allowence' do
+      context 'is nil' do
+        let(:subject) { described_class.new(1, nil, nil, nil) }
+
+        it 'has a allowence limit of 0' do
+          expect(subject.allowence).to eq(0)
+        end
+      end
+      context 'has value' do
+        let(:allowence) { 123 }
+        let(:subject) { described_class.new(1, nil, nil, allowence) }
+
+        it 'has a allowence varible' do
+          expect(subject.allowence).to eq(allowence)
+        end
+      end
     end
   end
 
-  describe '.==' do
-    let(:subject) { described_class.new(1,2,3) }
-    let(:subject_clone) { described_class.new(1,2,3) }
-    it 'returns true when both attributes match between instances' do
-      expect(subject == subject_clone).to be(true)
+  describe '#calculate_tax' do
+    context 'all varibles set' do
+      let(:subject) { described_class.new(50, 1000, 10) }
+
+      it 'returns amount of tax due' do
+        expect(subject.calculate_tax(800)).to eq(75.0)
+      end
+
+      it 'returns correct amount of tax' do
+        expect(subject.calculate_tax(1100)).to eq(95.0)
+      end
+    end
+    context 'upper_limit not set' do
+      let(:subject) { described_class.new(50, nil, 10) }
+
+      it 'returns amount of tax due' do
+        expect(subject.calculate_tax(800)).to eq(75.0)
+      end
     end
   end
 
@@ -85,14 +108,20 @@ describe Calculator::Bracket do
         expect(subject.in_bracket?(6)).to be(true)
       end
     end
-    context 'value is below lower' do
+    context 'value is below lower limit' do
       it 'returns false' do
         expect(subject.in_bracket?(2)).to be(false)
       end
     end
-    context 'value is above upper' do
+    context 'value is above upper limit' do
+      it 'returns true' do
+        expect(subject.in_bracket?(30)).to be(true)
+      end
+    end
+
+    context 'value is on lower limit' do
       it 'returns false' do
-        expect(subject.in_bracket?(30)).to be(false)
+        expect(subject.in_bracket?(5)).to be(true)
       end
     end
 

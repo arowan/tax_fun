@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'calculator'
+require 'calculate'
 
-describe Calculator::Report do
+describe Calculate::Report do
 
   describe '.new' do
     it "creates instance of #{described_class.name}" do
@@ -19,9 +19,9 @@ describe Calculator::Report do
 
   describe '#to_s' do
     before do
-      allow(Calculator::Tax).to receive(:find_bracket).with(10).and_return(Calculator::Bracket.new(0, 15, 0))
+      allow(Calculate::Tax).to receive(:tax_and_allowance).with(10).and_return([0, 0])
     end
-    let(:expected_json) { "{\"income\"=>10, \"tax_rate\"=>0, \"tax_amount\"=>0, \"income_after_tax\"=>10}" }
+    let(:expected_json) { "{\"income\"=>10, \"tax_free_allowence\"=>0, \"taxable_income\"=>10, \"tax_amount\"=>0, \"income_after_tax\"=>10}" }
 
     context 'income is number' do
       let(:subject) { described_class.new(10) }
@@ -42,11 +42,11 @@ describe Calculator::Report do
 
   describe '#to_json' do
     before do
-      allow(Calculator::Tax).to receive(:find_bracket).with(10).and_return(Calculator::Bracket.new(0, 15, 0))
+      allow(Calculate::Tax).to receive(:tax_and_allowance).with(10).and_return([0, 0])
     end
 
     let(:subject) { described_class.new(10) }
-    let(:expected_json) { "{\"income\":10,\"tax_rate\":0,\"tax_amount\":0,\"income_after_tax\":10}" }
+    let(:expected_json) { "{\"income\":10,\"tax_free_allowence\":0,\"taxable_income\":10,\"tax_amount\":0,\"income_after_tax\":10}" }
 
     it 'returns report attributes as JSON' do
       expect(subject.to_json).to eq(expected_json)

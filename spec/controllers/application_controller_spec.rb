@@ -15,16 +15,15 @@ describe "Application home" do
     end
 
     it 'should display json with a message' do
-      expect(JSON.parse(last_response.body)).to eq({"message" => "POST an income to /report"})
+      expect(JSON.parse(last_response.body)).to eq({"message" => "request a report /report?income=XXXXX"})
     end
   end
 
-  context 'POST /report' do
-
-    let(:tax_report) { {"income"=>34010, "tax_rate"=>20, "tax_amount"=>6800, "income_after_tax"=>27210} }
+  context 'GET /report' do
+    let(:tax_report) { {"income"=>34010, "tax_free_allowence"=>11500, "taxable_income"=>22510, "tax_rate"=>20, "tax_amount"=>4500, "income_after_tax"=>29510} }
 
     before do
-      post '/report', {income: 34010}
+      get '/report', {income: 34010}
     end
 
     it "should return ok" do
