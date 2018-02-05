@@ -2,13 +2,17 @@ require 'json'
 
 module Bracket
   class Abstract
-    attr_reader :lower_limit, :upper_limit, :percent, :allowence
+    attr_reader :lower_limit, :upper_limit, :percent
 
     def initialize(lower_limit = nil, upper_limit = nil, percent = nil, allowence = nil)
       @lower_limit = lower_limit || 0
       @upper_limit = upper_limit
       @percent = percent || 0
       @allowence = allowence || 0
+    end
+
+    def allowence(*args)
+      @allowence
     end
 
     def calculate_tax(value)
