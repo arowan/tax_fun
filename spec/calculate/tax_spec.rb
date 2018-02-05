@@ -17,7 +17,8 @@ describe Calculate::Tax do
 
     context 'basic' do
       let(:income) { 25000 }
-      let(:expected_tax_and_allowence) { [2698.2, 11500] }
+      # let(:expected_tax_and_allowence) { [2698.2, 11500] }  # RESULT FROM tax.service.gov.uk
+      let(:expected_tax_and_allowence) { [2699.8, 11500] }
       it 'returns tax and allowence object' do
         expect(described_class.tax_and_allowance(income)).to eq(expected_tax_and_allowence)
       end
@@ -25,7 +26,8 @@ describe Calculate::Tax do
     #
     context 'higher' do
       let(:income) { 120_000 }
-      let(:expected_tax_and_allowence) { [40696.4, 1500] }
+      # let(:expected_tax_and_allowence) { [40696.4, 1500] }  # RESULT FROM tax.service.gov.uk
+      let(:expected_tax_and_allowence) { [36699.4, 1500] }
       it 'returns tax and allowence object' do
         expect(described_class.tax_and_allowance(income)).to eq(expected_tax_and_allowence)
       end
@@ -33,7 +35,8 @@ describe Calculate::Tax do
 
     context 'additional' do
       let(:income) { 180_000 }
-      let(:expected_tax_and_allowence) { [66800, 0] }
+      # let(:expected_tax_and_allowence) { [66800, 0] }    # RESULT FROM tax.service.gov.uk
+      let(:expected_tax_and_allowence) { [62199.4, 0] }
       it 'returns tax and allowence object' do
         expect(described_class.tax_and_allowance(income)).to eq(expected_tax_and_allowence)
       end

@@ -5,7 +5,7 @@ module Calculate
 
     BRACKETS ||= [
       ::Bracket::Abstract.new(nil, 11_500, 0, 11_500),
-      ::Bracket::Abstract.new(11_509, 45_000, 20, 11_500),
+      ::Bracket::Abstract.new(11_501, 45_000, 20, 11_500),
       ::Bracket::Higher.new,
       ::Bracket::Abstract.new(150_000, nil, 45, 0)
     ]

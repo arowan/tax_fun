@@ -20,7 +20,7 @@ describe "Application home" do
   end
 
   context 'GET /report' do
-    let(:tax_report) { {"income"=>34010, "tax_free_allowence"=>11500, "taxable_income"=>22510, "tax_rate"=>20, "tax_amount"=>4500, "income_after_tax"=>29510} }
+    let(:tax_report) { {"income"=>34010, "tax_free_allowence"=>11500, "taxable_income"=>22510, "tax_amount"=>4501.8, "income_after_tax"=>29508.2} }
 
     before do
       get '/report', {income: 34010}
