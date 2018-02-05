@@ -14,4 +14,4 @@ module RSpecMixin
   end
 end
 
-Rspec.configure { |c| c.include RSpecMixin }
+RSpec.configure { |c| c.include RSpecMixin }
